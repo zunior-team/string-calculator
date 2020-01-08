@@ -7,6 +7,9 @@ public class Calculator {
     private Pattern pattern = Pattern.compile("(.+)([+|\\-|*|/])(.+)");
 
     public int calculate(String input) {
+        if(input == null) {
+            throw new IllegalArgumentException("Input string is not valid");
+        }
         Matcher matcher = pattern.matcher(input);
 
         if(!matcher.find()) {
