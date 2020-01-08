@@ -23,6 +23,24 @@ public class Calculator {
         String subOperand = matcher.group(3).trim();
         System.out.println(subOperand);
 
-        return Integer.parseInt(operand) + Integer.parseInt(subOperand);
+        int parsedOperand = Integer.parseInt(operand);
+        int parsedSubOperand = Integer.parseInt(subOperand);
+
+        switch (operator) {
+            case "+":
+                return parsedOperand + parsedSubOperand;
+
+            case "-":
+                return parsedOperand - parsedSubOperand;
+
+            case "*":
+                return parsedOperand * parsedSubOperand;
+
+            case "/":
+                return parsedOperand / parsedSubOperand;
+
+            default:
+                throw new IllegalArgumentException("Unknown operator : " + operator);
+        }
     }
 }
