@@ -14,10 +14,15 @@ public class Formula {
     public Formula(int operand, String operator, String formulaString) {
         this.operand = operand;
         this.operator = operator;
-        this.formula = new Formula(formulaString);
+        this.formula = Interpreter.interpret(formulaString);
     }
 
     public Formula(String formulaString) {
+        this.formulaString = formulaString;
+    }
+
+    public Formula(int operand, String formulaString) {
+        this.operand = operand;
         this.formulaString = formulaString;
     }
 
