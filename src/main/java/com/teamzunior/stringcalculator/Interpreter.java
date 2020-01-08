@@ -18,7 +18,7 @@ public class Interpreter {
         }
 
         formula = formula.trim();
-        Matcher matcher = pattern.matcher(formula.trim());
+        Matcher matcher = pattern.matcher(formula);
         if(!matcher.find()) {
             return new Formula(interpretNumber(formula), formula);
         }
