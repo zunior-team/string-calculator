@@ -83,6 +83,5 @@ public class CalculatorTest {
     @NullAndEmptySource
     public void invalidInputTest(String input) {
         assertThatThrownBy(() -> calculator.calculate(input)).isInstanceOf(IllegalArgumentException.class);
-
     }
 }
