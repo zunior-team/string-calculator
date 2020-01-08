@@ -58,7 +58,7 @@ class StringCalculatorApplicationTests {
 
     @DisplayName(value = "사칙 연산 외 연산기호 입력할 경우 에러 처리")
     @ParameterizedTest
-    @ValueSource(strings = {"2 % 3", "4 !", "5 ^ 7"})
+    @ValueSource(strings = {"3 % 2", "4 ! 0", "5 ^ 7"})
     void invalidOperatorTest(final String expression) {
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> calculator.calculate(expression));
     }
