@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
-    private Pattern pattern = Pattern.compile("(\\ ?-?\\d)(\\ ?[+|\\-|*|/]\\ ?)(\\ ?-?\\d)");
+    private Pattern pattern = Pattern.compile("(\\ ?-?\\d+)(\\ ?[+|\\-|*|/]\\ ?)(\\ ?-?\\d+)");
 
     public int calculate(String input) {
         if(input == null) {

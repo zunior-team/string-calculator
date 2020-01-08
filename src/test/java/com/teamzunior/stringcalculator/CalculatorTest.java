@@ -36,13 +36,14 @@ public class CalculatorTest {
         return Stream.of(
                 Arguments.of("1 - 2", -1),
                 Arguments.of("1-2", -1),
-                Arguments.of("2-1", 1)
+                Arguments.of("2-1", 1),
+                Arguments.of("20-10", 10)
         );
     }
 
     @ParameterizedTest
     @MethodSource
-    @DisplayName("빼기 테스트")
+    @DisplayName("곱하기 테스트")
     public void multiplyTest(String input, int expected) {
         assertEquals(expected, calculator.calculate(input));
     }
@@ -55,6 +56,24 @@ public class CalculatorTest {
                 Arguments.of("1*2", 2),
                 Arguments.of("2*1", 2),
                 Arguments.of("1*-2", -2)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    @DisplayName("나누기 테스트")
+    public void divideTest(String input, int expected) {
+        assertEquals(expected, calculator.calculate(input));
+    }
+
+    private static Stream divideTest() {
+        return Stream.of(
+                Arguments.of("10 / 2", 5),
+                Arguments.of(" 10 / 3", 3),
+                Arguments.of(" 10 / 5 ", 2),
+                Arguments.of("1/2", 0),
+                Arguments.of("2/1", 2),
+                Arguments.of("1/-2", 0)
         );
     }
 
