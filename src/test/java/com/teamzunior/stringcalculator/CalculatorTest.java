@@ -14,21 +14,21 @@ public class CalculatorTest {
     private static Calculator calculator;
 
     @BeforeAll
-    public static void init() {
+    static void init() {
         calculator = new Calculator();
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1 + 2", "1+2", "2+1"})
     @DisplayName("더하기 테스트")
-    public void addTest(String input) {
+    void addTest(String input) {
         assertEquals(3, calculator.calculate(input));
     }
 
     @ParameterizedTest
     @MethodSource
     @DisplayName("빼기 테스트")
-    public void subTest(String input, int expected) {
+    void subTest(String input, int expected) {
         assertEquals(expected, calculator.calculate(input));
     }
 
@@ -62,7 +62,7 @@ public class CalculatorTest {
     @ParameterizedTest
     @MethodSource
     @DisplayName("나누기 테스트")
-    public void divideTest(String input, int expected) {
+    void divideTest(String input, int expected) {
         assertEquals(expected, calculator.calculate(input));
     }
 
@@ -81,7 +81,7 @@ public class CalculatorTest {
     @DisplayName("유효하지 않은 인풋 테스트")
     @ValueSource(strings = {"@+!", "@@@"})
     @NullAndEmptySource
-    public void invalidInputTest(String input) {
+    void invalidInputTest(String input) {
         assertThatThrownBy(() -> calculator.calculate(input)).isInstanceOf(IllegalArgumentException.class);
     }
 }
