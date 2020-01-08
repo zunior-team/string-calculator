@@ -61,17 +61,4 @@ public class OperatorTest {
                 Arguments.of(10, 5, 2)
         );
     }
-
-    @ParameterizedTest
-    @MethodSource
-    void numberOperatorTest(Integer x, Integer y, Integer result) {
-        assertThat(NUM.operate(x, y)).isEqualTo(result);
-    }
-
-    private static Stream numberOperatorTest() {
-        return Stream.of(
-                Arguments.of(10, null, 10),
-                Arguments.of(20, null, 20)
-        );
-    }
 }

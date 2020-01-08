@@ -2,6 +2,8 @@ package com.teamzunior.stringcalculator;
 
 import java.util.Objects;
 
+import static com.teamzunior.stringcalculator.Operator.PLUS;
+
 public class Formula {
     private Formula formula;
     private Operator operator;
@@ -18,11 +20,10 @@ public class Formula {
     /**
      * constructor for number only formula
      * @param operand
-     * @param operator
      */
-    public Formula(Integer operand, Operator operator) {
+    public Formula(Integer operand) {
         this.operand = operand;
-        this.operator = operator;
+        this.operator = PLUS;
         this.formula = new Formula() {
             public Integer calculate() {
                 return 0;

@@ -77,6 +77,20 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
+    @MethodSource
+    @DisplayName("나누기 테스트")
+    void complicatedTest(String input, int expected) {
+        assertEquals(expected, Calculator.calculate(input));
+    }
+
+    private static Stream complicatedTest() {
+        return Stream.of(
+                Arguments.of("10+20-40*-10/5", 20),
+                Arguments.of("10+-20--20*-10/-10", 10)
+        );
+    }
+
+    @ParameterizedTest
     @DisplayName("유효하지 않은 인풋 테스트")
     @ValueSource(strings = {"@+!", "@@@"})
     @NullAndEmptySource

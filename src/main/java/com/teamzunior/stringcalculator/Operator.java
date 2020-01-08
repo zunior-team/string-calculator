@@ -6,8 +6,7 @@ public enum Operator {
     PLUS((x, y) -> x + y),
     MINUS((x, y) -> x - y),
     MULTIPLY((x, y) -> x * y),
-    DIVIDE((x, y) -> x / y),
-    NUM((x, y) -> x);
+    DIVIDE((x, y) -> x / y);
 
     private BiFunction<Integer, Integer, Integer> function;
 

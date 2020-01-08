@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import static com.teamzunior.stringcalculator.Operator.*;
 
 public class Interpreter {
-    private static final Pattern pattern = Pattern.compile("(.*)(\\ ?[+|\\-|*|/]\\ ?)(\\ ?-?\\d+)");
+    private static final Pattern pattern = Pattern.compile("(.+)\\b([+\\-*/])(-?\\d+)");
     private static final Map<String, Operator> operators;
 
     private static final int FORMULA_INDEX = 1;
@@ -18,26 +18,54 @@ public class Interpreter {
     private static final int OPERAND_INDEX = 3;
 
     public static Formula interpret(String formula) {
+        Matcher matcher = validateAndExtractMatcher(formula);
+
+        if(!isFullyFormula(matcher)) {
+            return new Formula(interpretNumber(formula));
+        }
+
+        return new Formula(
+                extractOperand(matcher),
+                operators.get(extractOperator(matcher)),
+                extractSubFormula(matcher)
+        );
+    }
+
+    private static Matcher validateAndExtractMatcher(String formula) {
         if(isInvalidInput(formula)) {
             throw new IllegalArgumentException("Invalid input : " + formula);
         }
 
-        formula = formula.trim();
-        Matcher matcher = pattern.matcher(formula);
-        if(!matcher.find()) {
-            return new Formula(interpretNumber(formula), NUM);
-        }
+        formula = refineFormula(formula);
 
-        String subFormula = matcher.group(FORMULA_INDEX).trim();
-        String operator = matcher.group(OPERATOR_INDEX).trim();
-        int operand = interpretNumber(matcher.group(OPERAND_INDEX).trim());
+        return pattern.matcher(formula);
+    }
 
-        return new Formula(operand, operators.get(operator), subFormula);
+
+    private static boolean isFullyFormula(Matcher matcher) {
+        return matcher.find();
+    }
+
+    private static String extractSubFormula(Matcher matcher) {
+        return matcher.group(FORMULA_INDEX).trim();
+    }
+
+    private static String extractOperator(Matcher matcher) {
+        return matcher.group(OPERATOR_INDEX).trim();
+    }
+
+    private static Integer extractOperand(Matcher matcher) {
+        return interpretNumber(matcher.group(OPERAND_INDEX).trim());
+    }
+
+    private static String refineFormula(String formula) {
+        return formula.trim()
+                .replaceAll(" ", "");
     }
 
     private static int interpretNumber(String formula) {
         try {
-            return Integer.parseInt(formula);
+            return Integer.parseInt(refineFormula(formula));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid input : " + formula);
         }

@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
+import static com.teamzunior.stringcalculator.Operator.DIVIDE;
 import static com.teamzunior.stringcalculator.Operator.PLUS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -25,9 +26,9 @@ public class InterpreterTest {
 
     private static Stream interpretTest() {
         return Stream.of(
-                Arguments.of(new Formula(1, PLUS, "2"), "1+2"),
-                Arguments.of(new Formula(1, PLUS, "2+3"), "1+2+3"),
-                Arguments.of(new Formula(1, PLUS, "2-3*4/5"), "1+2-3*4/5")
+                Arguments.of(new Formula(2, PLUS, "1"), "1+2"),
+                Arguments.of(new Formula(3, PLUS, "1+2"), "1+2+3"),
+                Arguments.of(new Formula(5, DIVIDE, "1+2-3*4"), "1+2-3*4/5")
         );
     }
 
