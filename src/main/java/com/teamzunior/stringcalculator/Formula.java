@@ -2,13 +2,10 @@ package com.teamzunior.stringcalculator;
 
 import java.util.Objects;
 
-public class Formula {
+public class Formula implements Expression {
     private Integer operand;
     private Operator operator;
-    private Formula formula;
-
-    public Formula() {
-    }
+    private Expression formula;
 
     public Formula(Integer operand, Operator operator, String formulaString) {
         this.operand = operand;
@@ -19,9 +16,10 @@ public class Formula {
     public Formula(Integer operand, Operator operator) {
         this.operand = operand;
         this.operator = operator;
-        this.formula = new Number();
+        this.formula = () -> 0;
     }
 
+    @Override
     public Integer calculate() {
         return operator.operate(operand, formula.calculate());
     }
