@@ -10,12 +10,12 @@ import java.util.regex.Pattern;
 import static com.teamzunior.stringcalculator.Operator.*;
 
 public class Interpreter {
-    private static final Pattern pattern = Pattern.compile("(\\ ?-?\\d+)(\\ ?[+|\\-|*|/]\\ ?)(.*)");
+    private static final Pattern pattern = Pattern.compile("(.*)(\\ ?[+|\\-|*|/]\\ ?)(\\ ?-?\\d+)");
     private static final Map<String, Operator> operators;
 
-    private static final int OPERAND_INDEX = 1;
+    private static final int FORMULA_INDEX = 1;
     private static final int OPERATOR_INDEX = 2;
-    private static final int FORMULA_INDEX = 3;
+    private static final int OPERAND_INDEX = 3;
 
     public static Formula interpret(String formula) {
         if(isInvalidInput(formula)) {
@@ -28,9 +28,9 @@ public class Interpreter {
             return new Formula(interpretNumber(formula), NUM);
         }
 
-        int operand = interpretNumber(matcher.group(OPERAND_INDEX).trim());
-        String operator = matcher.group(OPERATOR_INDEX).trim();
         String subFormula = matcher.group(FORMULA_INDEX).trim();
+        String operator = matcher.group(OPERATOR_INDEX).trim();
+        int operand = interpretNumber(matcher.group(OPERAND_INDEX).trim());
 
         return new Formula(operand, operators.get(operator), subFormula);
     }

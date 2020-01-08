@@ -2,10 +2,12 @@ package com.teamzunior.stringcalculator;
 
 import java.util.Objects;
 
-public class Formula implements Expression {
-    private Integer operand;
+public class Formula {
+    private Formula formula;
     private Operator operator;
-    private Expression formula;
+    private Integer operand;
+
+    public Formula() {}
 
     public Formula(Integer operand, Operator operator, String formulaString) {
         this.operand = operand;
@@ -13,15 +15,23 @@ public class Formula implements Expression {
         this.formula = Interpreter.interpret(formulaString);
     }
 
+    /**
+     * constructor for number only formula
+     * @param operand
+     * @param operator
+     */
     public Formula(Integer operand, Operator operator) {
         this.operand = operand;
         this.operator = operator;
-        this.formula = () -> 0;
+        this.formula = new Formula() {
+            public Integer calculate() {
+                return 0;
+            }
+        };
     }
 
-    @Override
     public Integer calculate() {
-        return operator.operate(operand, formula.calculate());
+        return operator.operate(formula.calculate(), operand);
     }
 
     @Override
