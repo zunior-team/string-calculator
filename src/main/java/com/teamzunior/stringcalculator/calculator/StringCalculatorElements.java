@@ -31,16 +31,12 @@ public class StringCalculatorElements {
     }
 
     public int calculateAll() {
-        Queue<Integer> numberQueue = new LinkedList<>(numbers);
-        Queue<CalculateType> calculateTypeQueue = new LinkedList<>(calculateTypes);
-
-        int result = numberQueue.poll();
-
-        while (!CollectionUtils.isEmpty(numberQueue) && !CollectionUtils.isEmpty(calculateTypeQueue)) {
-            final int argument = numberQueue.poll();
-            final CalculateType calculateType = calculateTypeQueue.poll();
-
-            result = Calculator.calculate(result, argument, calculateType);
+        int result = numbers.get(0);
+        for (int i = 1; i <= calculateTypes.size(); i++) {
+            final int first = result;
+            final int second = numbers.get(i);
+            final CalculateType calculateType = calculateTypes.get(i - 1);
+            result = Calculator.calculate(first, second, calculateType);
         }
 
         return result;
