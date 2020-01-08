@@ -18,7 +18,7 @@ public class Interpreter {
     private static final int OPERAND_INDEX = 3;
 
     public static Formula interpret(String formula) {
-        Matcher matcher = validateAndExtractMatcher(formula);
+        Matcher matcher = validateFormulaAndExtractMatcher(formula);
 
         if(!isFullyFormula(matcher)) {
             return new Formula(interpretNumber(formula));
@@ -31,7 +31,7 @@ public class Interpreter {
         );
     }
 
-    private static Matcher validateAndExtractMatcher(String formula) {
+    private static Matcher validateFormulaAndExtractMatcher(String formula) {
         if(isInvalidInput(formula)) {
             throw new IllegalArgumentException("Invalid input : " + formula);
         }
