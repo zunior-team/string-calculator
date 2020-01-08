@@ -41,6 +41,24 @@ public class CalculatorTest {
     }
 
     @ParameterizedTest
+    @MethodSource
+    @DisplayName("빼기 테스트")
+    public void multiplyTest(String input, int expected) {
+        assertEquals(expected, calculator.calculate(input));
+    }
+
+    private static Stream multiplyTest() {
+        return Stream.of(
+                Arguments.of("1 * 2", 2),
+                Arguments.of(" 1 * 2", 2),
+                Arguments.of(" 1 * 2 ", 2),
+                Arguments.of("1*2", 2),
+                Arguments.of("2*1", 2),
+                Arguments.of("1*-2", -2)
+        );
+    }
+
+    @ParameterizedTest
     @DisplayName("유효하지 않은 인풋 테스트")
     @ValueSource(strings = {"@+!", "@@@"})
     @NullAndEmptySource
