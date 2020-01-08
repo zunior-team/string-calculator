@@ -3,22 +3,27 @@ package com.teamzunior.stringcalculator;
 import java.util.Objects;
 
 public class Formula {
-    private int operand;
+    private Integer operand;
     private Operator operator;
     private Formula formula;
 
     public Formula() {
     }
 
-    public Formula(int operand, Operator operator, String formulaString) {
+    public Formula(Integer operand, Operator operator, String formulaString) {
         this.operand = operand;
         this.operator = operator;
         this.formula = Interpreter.interpret(formulaString);
     }
 
-    public Formula(int operand, Operator operator) {
+    public Formula(Integer operand, Operator operator) {
         this.operand = operand;
         this.operator = operator;
+        this.formula = new Number();
+    }
+
+    public Integer calculate() {
+        return operator.operate(operand, formula.calculate());
     }
 
     @Override

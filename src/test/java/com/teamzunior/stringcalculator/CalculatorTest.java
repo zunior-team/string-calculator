@@ -11,25 +11,19 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculatorTest {
-    private static Calculator calculator;
-
-    @BeforeAll
-    static void init() {
-        calculator = new Calculator();
-    }
 
     @ParameterizedTest
     @ValueSource(strings = {"1 + 2", "1+2", "2+1"})
     @DisplayName("더하기 테스트")
     void addTest(String input) {
-        assertEquals(3, calculator.calculate(input));
+        assertEquals(3, Calculator.calculate(input));
     }
 
     @ParameterizedTest
     @MethodSource
     @DisplayName("빼기 테스트")
     void subTest(String input, int expected) {
-        assertEquals(expected, calculator.calculate(input));
+        assertEquals(expected, Calculator.calculate(input));
     }
 
     private static Stream subTest() {
@@ -45,7 +39,7 @@ public class CalculatorTest {
     @MethodSource
     @DisplayName("곱하기 테스트")
     public void multiplyTest(String input, int expected) {
-        assertEquals(expected, calculator.calculate(input));
+        assertEquals(expected, Calculator.calculate(input));
     }
 
     private static Stream multiplyTest() {
@@ -63,7 +57,7 @@ public class CalculatorTest {
     @MethodSource
     @DisplayName("나누기 테스트")
     void divideTest(String input, int expected) {
-        assertEquals(expected, calculator.calculate(input));
+        assertEquals(expected, Calculator.calculate(input));
     }
 
     private static Stream divideTest() {
@@ -82,6 +76,6 @@ public class CalculatorTest {
     @ValueSource(strings = {"@+!", "@@@"})
     @NullAndEmptySource
     void invalidInputTest(String input) {
-        assertThatThrownBy(() -> calculator.calculate(input)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Calculator.calculate(input)).isInstanceOf(IllegalArgumentException.class);
     }
 }

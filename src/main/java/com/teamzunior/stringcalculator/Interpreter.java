@@ -17,14 +17,6 @@ public class Interpreter {
     private static final int OPERATOR_INDEX = 2;
     private static final int FORMULA_INDEX = 3;
 
-    static {
-        operators = new HashMap<>();
-        operators.put("+", PLUS);
-        operators.put("-", MINUS);
-        operators.put("*", MULTIPLY);
-        operators.put("/", DIVIDE);
-    }
-
     public static Formula interpret(String formula) {
         if(isInvalidInput(formula)) {
             throw new IllegalArgumentException("Invalid input : " + formula);
@@ -53,5 +45,13 @@ public class Interpreter {
 
     private static boolean isInvalidInput(String formula) {
         return StringUtils.isEmpty(formula);
+    }
+
+    static {
+        operators = new HashMap<>();
+        operators.put("+", PLUS);
+        operators.put("-", MINUS);
+        operators.put("*", MULTIPLY);
+        operators.put("/", DIVIDE);
     }
 }
