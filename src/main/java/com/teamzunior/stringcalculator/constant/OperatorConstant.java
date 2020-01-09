@@ -7,8 +7,8 @@ public class OperatorConstant {
 
     private OperatorConstant(){}
 
-    public static final char PLUS_SYMBOL = '+';
-    public static final char MINUS_SYMBOL = '-';
-    public static final char DIVIDE_SYMBOL = '/';
-    public static final char MULTIPLY_SYMBOL = '*';
+    public static final String PLUS_SYMBOL = "+";
+    public static final String SUBTRACT_SYMBOL = "-";
+    public static final String DIVIDE_SYMBOL = "/";
+    public static final String MULTIPLY_SYMBOL = "*";
 }
