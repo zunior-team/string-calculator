@@ -26,14 +26,15 @@ public class Calculation {
 
     private void initCalculation(String calculationString) {
         final List<String> values = Arrays.asList(calculationString.split(" "));
+        final int size = values.size();
 
         //짝수는 Number
-        for (int i = 0; i < values.size(); i = i + 2) {
+        for (int i = 0; i < size; i = i + 2) {
             numbers.add(Double.parseDouble(values.get(i)));
         }
 
         //홀수는 Operator
-        for (int i = 1; i < values.size(); i = i + 2) {
+        for (int i = 1; i < size; i = i + 2) {
             operators.add(registerOperators.parse(values.get(i)));
         }
     }
