@@ -27,10 +27,10 @@ class CalculateTypeTest {
     @Test
     @DisplayName("지정된 기호가 아닌 값 입력시 Exception을 던진다")
     void createFailTest() {
-        //when
 
         //then
         assertThrows(IllegalArgumentException.class,
+                //when
                 () -> CalculateType.findBySign("blabla"));
     }
 
@@ -38,10 +38,10 @@ class CalculateTypeTest {
     @NullAndEmptySource
     @DisplayName("null 혹은 빈값 입력시 Exception을 던진다")
     void createFailTest(String sign) {
-        //when
 
         //then
         assertThrows(IllegalArgumentException.class,
+                //when
                 () -> CalculateType.findBySign(sign));
     }
 

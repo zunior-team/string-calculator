@@ -24,7 +24,7 @@ public enum CalculateType {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    private boolean hasSign(String sign) {
-        return this.sign.equalsIgnoreCase(sign);
+    private boolean hasSign(String param) {
+        return sign.equalsIgnoreCase(param);
     }
 }
