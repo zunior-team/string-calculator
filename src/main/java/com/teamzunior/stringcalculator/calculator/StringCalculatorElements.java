@@ -36,7 +36,7 @@ public class StringCalculatorElements {
     public int calculateAll() {
         int result = numbers.get(0);
         for (int calculateTypeIndex = 0; calculateTypeIndex < calculateTypes.size(); calculateTypeIndex++) {
-            final int numbersIndex = calculateTypeIndex - 1;
+            final int numbersIndex = calculateTypeIndex + 1;
             final int second = numbers.get(numbersIndex);
 
             final CalculateType calculateType = calculateTypes.get(calculateTypeIndex);
