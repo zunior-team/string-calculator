@@ -1,5 +1,7 @@
 package com.teamzunior.stringcalculator.calculator;
 
+import org.springframework.util.Assert;
+
 import java.util.Scanner;
 
 
@@ -12,21 +14,42 @@ public class InputListener {
 
 
     public void listen() {
-        System.out.println("################# LISTENING ...     #####################");
-        System.out.println("################# PRESS q! to EXIT  #####################");
+        printStartMessage();
 
-        String input = scanner.nextLine()
-                .trim();
+        String input = getTrimmedNextLine();
+
         while (!END_SIGN.equalsIgnoreCase(input)) {
+            final String[] tokens = input.split(BLANK_DELIMITER);
 
-            final int result = StringCalculator.calculate(input.split(BLANK_DELIMITER));
+            validateElementsCount(tokens);
+
+            final int result = StringCalculator.calculate(tokens);
+
             System.out.println(result);
 
-
-            input = scanner.nextLine()
-                    .trim();
+            input = getTrimmedNextLine();
         }
 
+        printEndMessage();
+    }
+
+    private void printEndMessage() {
         System.out.println("#################        EXIT       #####################");
+    }
+
+    private void printStartMessage() {
+        System.out.println("################# LISTENING ...     #####################");
+        System.out.println("################# PRESS q! to EXIT  #####################");
+    }
+
+    private void validateElementsCount(String[] tokens) {
+        if (tokens.length < 3) {
+            throw new IllegalArgumentException("elements length must lager than 2");
+        }
+    }
+
+    private String getTrimmedNextLine() {
+        return scanner.nextLine()
+                .trim();
     }
 }

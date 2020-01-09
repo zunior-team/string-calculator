@@ -8,7 +8,7 @@ import java.util.function.BiFunction;
 
 public class Calculator {
 
-    private static Map<CalculateType, BiFunction<Integer, Integer, Integer>> calculateMap = new HashMap();
+    private static Map<CalculateType, BiFunction<Integer, Integer, Integer>> calculateMap = new HashMap<>();
 
     static {
         calculateMap.put(CalculateType.SUM, Math::addExact);
@@ -22,7 +22,6 @@ public class Calculator {
 
     public static int calculate(int a, int b, CalculateType calculateType) {
         Assert.notNull(calculateType, "calculateType must not be null");
-
 
         return calculateMap.get(calculateType)
                 .apply(a, b);

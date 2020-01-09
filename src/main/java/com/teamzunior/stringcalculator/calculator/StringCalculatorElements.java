@@ -1,13 +1,10 @@
 package com.teamzunior.stringcalculator.calculator;
 
 
-import org.springframework.util.CollectionUtils;
-
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.stream.IntStream;
 
+import static java.lang.Integer.parseInt;
 import static java.util.stream.Collectors.toList;
 
 public class StringCalculatorElements {
@@ -18,13 +15,19 @@ public class StringCalculatorElements {
     public StringCalculatorElements(String[] elements) {
         final int lengthOfElements = elements.length;
 
+        this.numbers = collectNumbers(elements, lengthOfElements);
+        this.calculateTypes = collectCalculateTypes(elements, lengthOfElements);
+    }
 
-        this.numbers = IntStream.range(0, lengthOfElements)
+    private List<Integer> collectNumbers(String[] elements, int lengthOfElements) {
+        return IntStream.range(0, lengthOfElements)
                 .filter(num -> num % 2 == 0)
-                .mapToObj(index -> Integer.parseInt(elements[index]))
+                .mapToObj(index -> parseInt(elements[index]))
                 .collect(toList());
+    }
 
-        this.calculateTypes = IntStream.range(0, lengthOfElements)
+    private List<CalculateType> collectCalculateTypes(String[] elements, int lengthOfElements) {
+        return IntStream.range(0, lengthOfElements)
                 .filter(num -> num % 2 == 1)
                 .mapToObj(index -> CalculateType.findBySign(elements[index]))
                 .collect(toList());
@@ -32,11 +35,12 @@ public class StringCalculatorElements {
 
     public int calculateAll() {
         int result = numbers.get(0);
-        for (int i = 1; i <= calculateTypes.size(); i++) {
-            final int first = result;
-            final int second = numbers.get(i);
-            final CalculateType calculateType = calculateTypes.get(i - 1);
-            result = Calculator.calculate(first, second, calculateType);
+        for (int calculateTypeIndex = 0; calculateTypeIndex < calculateTypes.size(); calculateTypeIndex++) {
+            final int numbersIndex = calculateTypeIndex - 1;
+            final int second = numbers.get(numbersIndex);
+
+            final CalculateType calculateType = calculateTypes.get(calculateTypeIndex);
+            result = Calculator.calculate(result, second, calculateType);
         }
 
         return result;

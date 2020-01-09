@@ -1,5 +1,7 @@
 package com.teamzunior.stringcalculator.calculator;
 
+import org.springframework.util.Assert;
+
 import java.util.Arrays;
 
 import static com.teamzunior.stringcalculator.calculator.StringCalculator.*;
@@ -15,6 +17,7 @@ public enum CalculateType {
     }
 
     public static CalculateType findBySign(String sign) {
+        Assert.notNull(sign, "sign must not be null");
         return Arrays.stream(values())
                 .filter(calculateType -> calculateType.hasSign(sign))
                 .findAny()
