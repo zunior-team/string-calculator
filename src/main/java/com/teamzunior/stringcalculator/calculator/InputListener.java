@@ -1,7 +1,5 @@
 package com.teamzunior.stringcalculator.calculator;
 
-import org.springframework.util.Assert;
-
 import java.util.Scanner;
 
 
