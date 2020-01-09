@@ -4,6 +4,7 @@ import com.teamzunior.stringcalculator.calculator.StringCalculatorElements;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static com.teamzunior.stringcalculator.calculator.InputListener.BLANK_DELIMITER;
@@ -34,8 +35,23 @@ class StringCalculatorElementsTest {
         //then
         assertThrows(IllegalArgumentException.class,
                 //when
-                () -> new StringCalculatorElements(input.split(BLANK_DELIMITER)));
+                () -> {
+                    final String[] elements = input.split(BLANK_DELIMITER);
+                    new StringCalculatorElements(elements);
+                });
     }
 
+    @ParameterizedTest
+    @DisplayName("가지고 있는 elements 계산 테스트")
+    @CsvSource({"2 + 3 * 4 / 2,10", " 3 + 1 / 2 + 1 * 5,15", "5 / 1 * 1,5"})
+    void calculateTest(String string, int result) {
+        //given
+        final String[] elements = string.split(BLANK_DELIMITER);
 
+        //when
+        final int calculate = new StringCalculatorElements(elements).calculateAll();
+
+        //then
+        assertThat(calculate).isEqualTo(result);
+    }
 }
