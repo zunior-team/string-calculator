@@ -20,11 +20,11 @@ public class ExpressionUtils {
             return false;
         }
 
-        if (validateEachValue(expression, previousValue)) {
+        if (!validateEachValue(expression, previousValue)) {
             return false;
         }
 
-        if (!previousValue.equals(ExpressionValue.NUMBER)) {
+        if (!previousValue.isEqual(ExpressionValue.NUMBER)) {
             log.error("Last value must be number.");
             return false;
         }
@@ -45,11 +45,11 @@ public class ExpressionUtils {
     }
 
     private static Boolean validateSingleOperatorValue(ExpressionValueWrapper previousValue) {
-        if (previousValue == null) {
+        if (previousValue.isNull()) {
             log.error("First value must be number.");
             return false;
         }
-        if (previousValue.equals(ExpressionValue.OPERATOR)) {
+        if (previousValue.isEqual(ExpressionValue.OPERATOR)) {
             log.error("Two operators came out in a row.");
             return false;
         }
@@ -58,7 +58,7 @@ public class ExpressionUtils {
     }
 
     private static Boolean validateSingleNumberValue(ExpressionValueWrapper previousValue) {
-        if (previousValue.equals(ExpressionValue.NUMBER)) {
+        if (!previousValue.isNull() && previousValue.isEqual(ExpressionValue.NUMBER)) {
             log.error("Two numbers came out in a row.");
             return false;
         }

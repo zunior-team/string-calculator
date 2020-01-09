@@ -18,7 +18,7 @@ public class StringCalculatorUsingPolymorphism implements StringCalculator {
     }
 
     private Integer calculate(String[] expression) {
-        if(!validate(expression)) {
+        if (!validate(expression)) {
             throw new RuntimeException();
         }
 

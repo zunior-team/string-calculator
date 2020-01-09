@@ -11,7 +11,11 @@ public class ExpressionValueWrapper {
         expressionValue = to;
     }
 
-    public ExpressionValue getExpressionValue() {
-        return this.expressionValue;
+    public Boolean isEqual(ExpressionValue expressionValue) {
+        return this.expressionValue.equals(expressionValue);
+    }
+
+    public Boolean isNull() {
+        return this.expressionValue == null;
     }
 }
