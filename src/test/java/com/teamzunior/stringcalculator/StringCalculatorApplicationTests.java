@@ -1,18 +1,22 @@
 package com.teamzunior.stringcalculator;
 
 import com.teamzunior.stringcalculator.service.StringCalculator;
+import com.teamzunior.stringcalculator.service.impl.StringCalculatorUsingPolymorphism;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import javax.annotation.PostConstruct;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class StringCalculatorApplicationTests {
 
-    private StringCalculator calculator;
+    private StringCalculator calculator = new StringCalculatorUsingPolymorphism();
 
     @DisplayName(value = "덧셈식 처리")
     @ParameterizedTest
@@ -32,7 +36,7 @@ class StringCalculatorApplicationTests {
     @ParameterizedTest
     @ValueSource(strings = {"1 * 12", "2 * 6", "3 * 4"})
     void multiplyTest(final String expression) {
-        assertThat(calculator.calculate(expression)).isEqualTo(1);
+        assertThat(calculator.calculate(expression)).isEqualTo(12);
     }
 
     @DisplayName(value = "나눗셈 처리")
