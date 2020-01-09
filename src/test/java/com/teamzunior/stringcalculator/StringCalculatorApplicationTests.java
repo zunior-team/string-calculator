@@ -2,14 +2,10 @@ package com.teamzunior.stringcalculator;
 
 import com.teamzunior.stringcalculator.service.StringCalculator;
 import com.teamzunior.stringcalculator.service.impl.StringCalculatorUsingPolymorphism;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import javax.annotation.PostConstruct;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -64,6 +60,13 @@ class StringCalculatorApplicationTests {
     @ParameterizedTest
     @ValueSource(strings = {"3 % 2", "4 ! 0", "5 ^ 7"})
     void invalidOperatorTest(final String expression) {
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> calculator.calculate(expression));
+    }
+
+    @DisplayName(value = "정상적인 식이 아닐 경우 에러 처리")
+    @ParameterizedTest
+    @ValueSource(strings = {"2 + 3 * ", "+ 3 - 2", "5 5 * 2 - 1", " 5 + + 6 - 3"})
+    void invalidExpressionTest(final String expression) {
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> calculator.calculate(expression));
     }
 }

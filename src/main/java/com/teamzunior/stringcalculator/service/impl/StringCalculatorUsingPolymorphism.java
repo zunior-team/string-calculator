@@ -23,36 +23,36 @@ public class StringCalculatorUsingPolymorphism implements StringCalculator {
         }
 
         Integer result = null;
-        Stack<String> operatorStack = new Stack<>();
+        Stack<String> stringOperatorStack = new Stack<>();
 
         for (String target : expression) {
-            result = operate(result, operatorStack, target);
+            result = operate(result, stringOperatorStack, target);
         }
 
         return result;
     }
 
-    private Integer operate(Integer result, Stack<String> operatorStack, String target) {
+    private Integer operate(Integer result, Stack<String> stringOperatorStack, String target) {
         if (StringUtils.isNumeric(target)) {
-            return handleNumber(result, operatorStack, target);
+            return operateWithNumber(result, stringOperatorStack, target);
         }
-        return handleOperator(result, operatorStack, target);
+        return operateWithOperator(result, stringOperatorStack, target);
     }
 
-    private Integer handleNumber(Integer result, Stack<String> operatorStack, String target) {
+    private Integer operateWithNumber(Integer result, Stack<String> stringOperatorStack, String target) {
         if (result == null) {
             return Integer.parseInt(target);
         }
 
-        if (operatorStack.empty()) {
+        if (stringOperatorStack.empty()) {
             throw new RuntimeException("The Expression is not Valid: It must have more operator.");
         }
 
-        String operator = operatorStack.pop();
-        return operators.operate(operator, String.valueOf(result), target);
+        String stringOperator = stringOperatorStack.pop();
+        return operators.operate(stringOperator, String.valueOf(result), target);
     }
 
-    private Integer handleOperator(Integer result, Stack<String> operatorStack, String target) {
+    private Integer operateWithOperator(Integer result, Stack<String> operatorStack, String target) {
         operatorStack.push(target);
         return result;
     }
