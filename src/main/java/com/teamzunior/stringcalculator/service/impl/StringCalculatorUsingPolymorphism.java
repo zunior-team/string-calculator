@@ -7,24 +7,28 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Stack;
 
 import static com.teamzunior.stringcalculator.utils.ExpressionUtils.separateByBlank;
+import static com.teamzunior.stringcalculator.utils.ExpressionUtils.validate;
 
 public class StringCalculatorUsingPolymorphism implements StringCalculator {
     private StringOperators operators = new StringOperators();
 
     @Override
     public Integer calculate(String expression) {
-        if(org.springframework.util.StringUtils.isEmpty(expression))
-            throw new RuntimeException("It is Empty.");
         return calculate(separateByBlank(expression));
     }
 
     private Integer calculate(String[] expression) {
+        if(!validate(expression)) {
+            throw new RuntimeException();
+        }
+
         Integer result = null;
         Stack<String> operatorStack = new Stack<>();
 
         for (String target : expression) {
             result = operate(result, operatorStack, target);
         }
+
         return result;
     }
 
