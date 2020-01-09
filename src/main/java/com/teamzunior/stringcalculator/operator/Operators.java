@@ -14,6 +14,10 @@ public class Operators {
 
     public Operators() {
         this.operateMap = new HashMap<>();
+        initBasicOperators();
+    }
+
+    private void initBasicOperators() {
         this.operateMap.put(PLUS_OPERATOR, (a, b) -> (a + b));
         this.operateMap.put(MINUS_OPERATOR, (a, b) -> (a - b));
         this.operateMap.put(MULTI_OPERATOR, (a, b) -> (a * b));

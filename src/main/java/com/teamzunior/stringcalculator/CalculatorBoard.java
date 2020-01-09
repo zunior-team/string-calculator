@@ -2,14 +2,14 @@ package com.teamzunior.stringcalculator;
 
 import java.util.Scanner;
 
-public class CalculatorGUI {
+public class CalculatorBoard {
 
     public static final int EXIT_CODE = 1;
     public static final String EXIT_COMMAND = "exit";
 
     private final Calculator calculator;
 
-    public CalculatorGUI(Calculator calculator) {
+    public CalculatorBoard(Calculator calculator) {
         assert calculator != null;
 
         this.calculator = calculator;

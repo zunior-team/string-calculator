@@ -1,7 +1,6 @@
 package com.teamzunior.stringcalculator;
 
 
-import com.teamzunior.stringcalculator.operator.OperatorFunction;
 import com.teamzunior.stringcalculator.operator.Operators;
 
 import java.util.ArrayList;
@@ -20,6 +19,12 @@ public class Calculation {
 
         this.registerOperators = registerOperators;
 
+        initCalculation(calculationString);
+
+        validate();
+    }
+
+    private void initCalculation(String calculationString) {
         final List<String> values = Arrays.asList(calculationString.split(" "));
 
         //짝수는 Number
@@ -31,8 +36,6 @@ public class Calculation {
         for (int i = 1; i < values.size(); i = i + 2) {
             operators.add(registerOperators.parse(values.get(i)));
         }
-
-        validate();
     }
 
     private void validate() {
