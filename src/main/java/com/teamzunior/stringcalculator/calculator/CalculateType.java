@@ -27,4 +27,8 @@ public enum CalculateType {
     private boolean hasSign(String param) {
         return sign.equalsIgnoreCase(param);
     }
+
+    public String getSign() {
+        return sign;
+    }
 }

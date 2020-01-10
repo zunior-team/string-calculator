@@ -7,6 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -24,19 +26,10 @@ class CalculateTypeTest {
         assertThat(foundType).isNotNull();
     }
 
-    @Test
-    @DisplayName("지정된 기호가 아닌 값 입력시 Exception을 던진다")
-    void createFailTest() {
-
-        //then
-        assertThrows(IllegalArgumentException.class,
-                //when
-                () -> CalculateType.findBySign("blabla"));
-    }
-
     @ParameterizedTest
     @NullAndEmptySource
-    @DisplayName("null 혹은 빈값 입력시 Exception을 던진다")
+    @ValueSource(strings = "blabla")
+    @DisplayName("null 혹은 빈값 혹은 존재하지 않는 값 입력시 Exception을 던진다")
     void createFailTest(String sign) {
 
         //then
@@ -45,4 +38,18 @@ class CalculateTypeTest {
                 () -> CalculateType.findBySign(sign));
     }
 
+    @Test
+    @DisplayName("각 sign은 Unique한 값으로 작성 되어있다.")
+    void testUniqueSign() {
+        //given
+        final CalculateType[] values = CalculateType.values();
+
+        //when
+        final long uniqueSignCount = Arrays.stream(values)
+                .map(CalculateType::getSign)
+                .distinct().count();
+
+        //then
+        assertThat(values.length).isEqualTo(uniqueSignCount);
+    }
 }
