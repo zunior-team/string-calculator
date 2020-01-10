@@ -18,20 +18,19 @@ public class CalculatorBoard {
     public int waitInput() {
         final Scanner scanner = new Scanner(System.in);
 
-        while (true) {
+        String input = "";
+        while (!isExitCommand(input)) {
             System.out.println("계산식을 입력해주세요.\n");
 
-            final String input = scanner.nextLine();
-
-            if(isExitCommand(input)){
-                System.out.println("계산기를 종료합니다");
-                return EXIT_CODE;
-            }
-
+            input = scanner.nextLine();
             double result = calculator.calculate(input);
 
             System.out.println("결과 : " + result);
         }
+
+        System.out.println("계산기를 종료합니다");
+
+        return EXIT_CODE;
     }
 
     private boolean isExitCommand(String input) {

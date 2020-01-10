@@ -1,5 +1,6 @@
 package com.teamzunior.stringcalculator.operator;
 
+import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -7,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.offset;
 import static org.junit.jupiter.api.Assertions.*;
 
 class OperatorsTest {
@@ -19,10 +21,10 @@ class OperatorsTest {
 
     @DisplayName("기본 연산자 테스트")
     @ParameterizedTest(name = "{1} {0} {2} == {3}")
-    @CsvSource({"+, 3, 2, 5", "-, 3, 2, 1", "*, 3, 2, 6", "/, 6, 2, 3"})
-    void testBasicOperator(String operator, double a, double b, double expected) {
+    @CsvSource({"+, 3, 2, 5", "-, 3.3, 2.1, 1.2", "*, 3, 2, 6", "/, 5, 2, 2.5"})
+    void testBasicOperator(String operator, double x, double y, double expected) {
         final Operators operators = new Operators();
-        assertThat(operators.apply(operator, a, b)).isEqualTo(expected);
+        assertThat(operators.apply(operator, x, y)).isEqualTo(expected);
     }
 
     @DisplayName("커스텀 연산자 테스트")

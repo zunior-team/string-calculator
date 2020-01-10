@@ -9,6 +9,8 @@ import java.util.List;
 
 public class Calculation {
 
+    private static final String SPLIT_TOKEN = "\\s";
+
     private final Operators registerOperators;
     private final List<Double> numbers = new ArrayList<>();
     private final List<String> operators = new ArrayList<>();
@@ -25,16 +27,16 @@ public class Calculation {
     }
 
     private void initCalculation(String calculationString) {
-        final List<String> values = Arrays.asList(calculationString.split(" "));
+        final List<String> values = Arrays.asList(calculationString.split(SPLIT_TOKEN));
         final int size = values.size();
 
         //짝수는 Number
-        for (int i = 0; i < size; i = i + 2) {
+        for (int i = 0; i < size; i += 2) {
             numbers.add(Double.parseDouble(values.get(i)));
         }
 
         //홀수는 Operator
-        for (int i = 1; i < size; i = i + 2) {
+        for (int i = 1; i < size; i += 2) {
             operators.add(registerOperators.parse(values.get(i)));
         }
     }
@@ -47,6 +49,7 @@ public class Calculation {
         if ((operatorSize == 0 && numberSize == 0) || (operatorSize * 2 != numberSize)) {
             throw new RuntimeException("죄송합니다, 연산식이 잘못되었습니다.");
         }
+
     }
 
     public double apply() {
