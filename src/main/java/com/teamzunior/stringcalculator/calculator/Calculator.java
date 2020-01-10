@@ -8,7 +8,7 @@ import java.util.function.BiFunction;
 
 public class Calculator {
 
-    private static Map<CalculateType, BiFunction<Integer, Integer, Integer>> calculateMap = new HashMap<>();
+    private static Map<CalculateType, BiFunction<Integer, Integer, Integer>> calculateMap = new EnumMap<>(CalculateType.class);
 
     static {
         calculateMap.put(CalculateType.SUM, Math::addExact);
