@@ -7,4 +7,5 @@ public class Main {
         final InputListener inputListener = new InputListener();
         inputListener.listen();
     }
+
 }

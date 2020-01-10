@@ -2,7 +2,7 @@ package com.teamzunior.stringcalculator.calculator;
 
 import org.springframework.util.Assert;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
@@ -20,10 +20,10 @@ public class Calculator {
     private Calculator() {
     }
 
-    public static int calculate(int a, int b, CalculateType calculateType) {
+    public static int calculate(int first, int second, CalculateType calculateType) {
         Assert.notNull(calculateType, "calculateType must not be null");
 
         return calculateMap.get(calculateType)
-                .apply(a, b);
+                .apply(first, second);
     }
 }

@@ -37,7 +37,7 @@ class StringCalculatorElementsTest {
                 //when
                 () -> {
                     final String[] elements = input.split(BLANK_DELIMITER);
-                    new StringCalculatorElements(elements);
+                    final StringCalculatorElements stringCalculatorElements = new StringCalculatorElements(elements);
                 });
     }
 
