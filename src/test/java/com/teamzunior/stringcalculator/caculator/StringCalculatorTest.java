@@ -4,6 +4,7 @@ import com.teamzunior.stringcalculator.calculator.StringCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static com.teamzunior.stringcalculator.calculator.InputListener.BLANK_DELIMITER;
@@ -31,6 +32,7 @@ class StringCalculatorTest {
     @ParameterizedTest
     //given
     @ValueSource(strings = {"1 3 4", "+ 1 - 3 / 3", "1+23", "1 5 3 5", "- + - /", "1 a 3 b 4 c 3", "1 +  5"})
+    @EmptySource
     @DisplayName("문자열 계산 실패 테스트")
     void createFailTest(String input) {
 
