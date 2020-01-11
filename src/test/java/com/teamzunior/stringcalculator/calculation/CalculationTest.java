@@ -1,4 +1,4 @@
-package com.teamzunior.stringcalculator;
+package com.teamzunior.stringcalculator.calculation;
 
 import com.teamzunior.stringcalculator.calculation.Calculation;
 import com.teamzunior.stringcalculator.operator.Operators;
