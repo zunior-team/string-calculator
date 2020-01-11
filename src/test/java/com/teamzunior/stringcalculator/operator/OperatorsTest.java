@@ -7,6 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +24,7 @@ class OperatorsTest {
     @DisplayName("기본 연산자 테스트")
     @ParameterizedTest(name = "{1} {0} {2} == {3}")
     @CsvSource({"+, 3, 2, 5", "-, 3.3, 2.1, 1.2", "*, 3, 2, 6", "/, 5, 2, 2.5"})
-    void testBasicOperator(String operator, double x, double y, double expected) {
+    void testBasicOperator(String operator, BigDecimal x, BigDecimal y, BigDecimal expected) {
         final Operators operators = new Operators();
         assertThat(operators.apply(operator, x, y)).isEqualTo(expected);
     }
@@ -34,18 +36,14 @@ class OperatorsTest {
         final Operators operators = new Operators();
         final String operator = "^";
 
-        operators.registerOperator(operator, (x, y) -> {
-                    double result = x;
-
-                    for (int i = 0; i < y - 1; i++) {
-                        result *= x;
-                    }
-                    return result;
-                }
-        );
+        operators.registerOperator(operator, (x, y) -> x.pow(y.intValue()));
 
         //when, then
-        assertThat(operators.apply(operator,2, 5)).isEqualTo(32);
+        final BigDecimal x = new BigDecimal(2);
+        final BigDecimal y = new BigDecimal(5);
+        final BigDecimal expected = new BigDecimal(32);
+
+        assertThat(operators.apply(operator, x, y)).isEqualTo(expected);
     }
 
     @DisplayName("기본 연산자 파싱 테스트")
@@ -65,7 +63,7 @@ class OperatorsTest {
         //given
         final Operators operators = new Operators();
         final String operator = "^";
-        operators.registerOperator(operator, (a, b) -> a * b * a * b);
+        operators.registerOperator(operator, (a, b) -> a);
 
         //when, then
         assertDoesNotThrow(() -> operators.parse(operator));

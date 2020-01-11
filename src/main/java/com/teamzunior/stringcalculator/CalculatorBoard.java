@@ -1,5 +1,6 @@
 package com.teamzunior.stringcalculator;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class CalculatorBoard {
@@ -18,12 +19,12 @@ public class CalculatorBoard {
     public int waitInput() {
         final Scanner scanner = new Scanner(System.in);
 
-        String input = "";
-        while (!isExitCommand(input)) {
+        String input;
+
+        while (!isExitCommand(input = scanner.nextLine())) {
             System.out.println("계산식을 입력해주세요.\n");
 
-            input = scanner.nextLine();
-            double result = calculator.calculate(input);
+            final BigDecimal result = calculator.calculate(input);
 
             System.out.println("결과 : " + result);
         }
