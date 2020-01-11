@@ -21,7 +21,7 @@ class OperatorsTest {
         assertDoesNotThrow(Operators::new);
     }
 
-    @DisplayName("기본 연산자 테스트")
+    @DisplayName("기본 연산자")
     @ParameterizedTest(name = "{1} {0} {2} == {3}")
     @CsvSource({"+, 3, 2, 5", "-, 3.3, 2.1, 1.2", "*, 3, 2, 6", "/, 5, 2, 2.5"})
     void testBasicOperator(String operator, BigDecimal x, BigDecimal y, BigDecimal expected) {
@@ -29,7 +29,7 @@ class OperatorsTest {
         assertThat(operators.apply(operator, x, y)).isEqualTo(expected);
     }
 
-    @DisplayName("커스텀 연산자 테스트")
+    @DisplayName("커스텀 연산자 등록")
     @Test
     void testCustomOperator() {
         //given
@@ -46,7 +46,7 @@ class OperatorsTest {
         assertThat(operators.apply(operator, x, y)).isEqualTo(expected);
     }
 
-    @DisplayName("기본 연산자 파싱 테스트")
+    @DisplayName("Validate, 기본 연산자 파싱")
     @ParameterizedTest(name = "연산자 {0} 일 때")
     @ValueSource(strings = {"+", "-", "*", "/"})
     void testParseBasicOperator(String operator) {
@@ -54,10 +54,10 @@ class OperatorsTest {
         final Operators operators = new Operators();
 
         //when, then
-        assertDoesNotThrow(() -> operators.parse(operator));
+        assertDoesNotThrow(() -> operators.validate(operator));
     }
 
-    @DisplayName("커스텀 연산자 파싱 테스트")
+    @DisplayName("Validate, 커스텀 연산자 파싱")
     @Test
     void testParseCustomOperator() {
         //given
@@ -66,10 +66,10 @@ class OperatorsTest {
         operators.registerOperator(operator, (a, b) -> a);
 
         //when, then
-        assertDoesNotThrow(() -> operators.parse(operator));
+        assertDoesNotThrow(() -> operators.validate(operator));
     }
 
-    @DisplayName("잘못된 연산자 파싱 테스트")
+    @DisplayName("Validate, 잘못된 연산자")
     @ParameterizedTest(name = "연산자 {0} 일 때")
     @ValueSource(strings = {"@", "!"})
     void testParseWrongOperator(String operator) {
@@ -77,6 +77,6 @@ class OperatorsTest {
         final Operators operators = new Operators();
 
         //when, then
-        assertThrows(RuntimeException.class, () -> operators.parse(operator));
+        assertThrows(RuntimeException.class, () -> operators.validate(operator));
     }
 }

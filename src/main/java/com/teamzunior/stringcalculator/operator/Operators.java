@@ -25,17 +25,12 @@ public class Operators {
         this.operators.put(operator, operatorFunction);
     }
 
-    public String parse(String operator) {
-        validate(operator);
-        return operator;
-    }
-
     public BigDecimal apply(String operator, BigDecimal x, BigDecimal y) {
         validate(operator);
         return operators.get(operator).apply(x, y);
     }
 
-    private void validate(String operator) {
+    public void validate(String operator) {
         if (!operators.containsKey(operator)) {
             throw new RuntimeException("죄송합니다, 알 수 없는 연산자 입니다 : " + operator);
         }
