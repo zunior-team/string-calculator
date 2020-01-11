@@ -1,8 +1,11 @@
 package com.teamzunior.stringcalculator;
 
 
+import com.teamzunior.stringcalculator.calculation.Calculation;
 import com.teamzunior.stringcalculator.operator.Operators;
 import org.springframework.util.StringUtils;
+
+import java.math.BigDecimal;
 
 public class Calculator {
 
@@ -14,7 +17,7 @@ public class Calculator {
         this.registerOperators = registerOperators;
     }
 
-    public double calculate(String input) {
+    public BigDecimal calculate(final String input) {
         validate(input);
 
         final Calculation calculation = new Calculation(input, registerOperators);

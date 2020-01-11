@@ -1,8 +1,10 @@
 package com.teamzunior.stringcalculator.operator;
 
+import java.math.BigDecimal;
+
 @FunctionalInterface
 public interface OperatorFunction {
 
-    double apply(double a, double b);
+    BigDecimal apply(BigDecimal x, BigDecimal y);
 
 }
