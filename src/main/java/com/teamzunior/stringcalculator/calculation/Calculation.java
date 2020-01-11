@@ -18,7 +18,7 @@ public class Calculation {
     private CalculationNumbers calculationNumbers;
     private CalculationOperators calculationOperators;
 
-    public Calculation(String calculationString, Operators registeredOperators) {
+    public Calculation(final String calculationString, Operators registeredOperators) {
         assert !StringUtils.isEmpty(calculationString);
         assert registeredOperators != null;
 

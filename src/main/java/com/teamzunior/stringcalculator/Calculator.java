@@ -17,7 +17,7 @@ public class Calculator {
         this.registerOperators = registerOperators;
     }
 
-    public BigDecimal calculate(String input) {
+    public BigDecimal calculate(final String input) {
         validate(input);
 
         final Calculation calculation = new Calculation(input, registerOperators);
