@@ -3,10 +3,10 @@ package com.teamzunior.stringcalculator;
 import java.util.function.BiFunction;
 
 public enum Operator {
-    PLUS((x, y) -> x + y),
-    MINUS((x, y) -> x - y),
-    MULTIPLY((x, y) -> x * y),
-    DIVIDE((x, y) -> x / y);
+    PLUS(Math::addExact),
+    MINUS(Math::subtractExact),
+    MULTIPLY(Math::multiplyExact),
+    DIVIDE(Math::floorDiv);
 
     private BiFunction<Integer, Integer, Integer> function;
 

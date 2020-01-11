@@ -71,8 +71,7 @@ public class CalculatorTest {
                 Arguments.of(" 10 / 3", 3),
                 Arguments.of(" 10 / 5 ", 2),
                 Arguments.of("1/2", 0),
-                Arguments.of("2/1", 2),
-                Arguments.of("1/-2", 0)
+                Arguments.of("2/1", 2)
         );
     }
 
