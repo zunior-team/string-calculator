@@ -1,11 +1,10 @@
 package com.teamzunior.stringcalculator.utils;
 
 import com.teamzunior.stringcalculator.model.ExpressionValue;
-import com.teamzunior.stringcalculator.model.ExpressionValueWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
+import java.util.stream.IntStream;
 
 @Slf4j
 public class ExpressionUtils {
@@ -14,55 +13,60 @@ public class ExpressionUtils {
     }
 
     public static Boolean validate(String[] expression) {
-        ExpressionValueWrapper previousValue = new ExpressionValueWrapper();
-
-        if(expression.length == 0) {
+        if (expression.length == 0) {
             return false;
         }
 
-        if (!validateEachValue(expression, previousValue)) {
+        return validateAllValue(expression);
+    }
+
+    private static boolean validateAllValue(String[] expression) {
+        ExpressionValue[] expressionValueTypes = new ExpressionValue[expression.length];
+        return IntStream.range(0, expression.length)
+                .allMatch(i -> validateSingleValue(expression, expressionValueTypes, i));
+    }
+
+    private static boolean validateSingleValue(String[] expression, ExpressionValue[] expressionValueTypes, int index) {
+        if(StringUtils.isEmpty(expression[index])) {
             return false;
         }
 
-        if (!previousValue.isEqual(ExpressionValue.NUMBER)) {
+        if (StringUtils.isNumeric(expression[index])) {
+            return validateSingleNumberValue(expression, expressionValueTypes, index);
+        }
+        return validateSingleOperatorValue(expression, expressionValueTypes, index);
+    }
+
+    private static boolean validateSingleNumberValue(String[] expression, ExpressionValue[] expressionValueTypes, int index) {
+        expressionValueTypes[index] = ExpressionValue.NUMBER;
+        if (index == 0) {
+            return true;
+        }
+
+        if (expressionValueTypes[index - 1].isNumber()) {
+            log.error("Two numbers came out in a row.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private static Boolean validateSingleOperatorValue(String[] expression, ExpressionValue[] expressionValueTypes, int index) {
+        expressionValueTypes[index] = ExpressionValue.OPERATOR;
+        if (index == 0) {
+            log.error("First value must be number.");
+            return false;
+        }
+
+        if (index == expression.length - 1) {
             log.error("Last value must be number.");
             return false;
         }
 
-        return true;
-    }
-
-    private static Boolean validateEachValue(String[] expression, ExpressionValueWrapper previousValue) {
-        return Arrays.stream(expression)
-                .allMatch(value -> validateSingleValue(previousValue, value));
-    }
-
-    private static Boolean validateSingleValue(ExpressionValueWrapper previousValue, String value) {
-        if (StringUtils.isNumeric(value)) {
-            return validateSingleNumberValue(previousValue);
-        }
-        return validateSingleOperatorValue(previousValue);
-    }
-
-    private static Boolean validateSingleOperatorValue(ExpressionValueWrapper previousValue) {
-        if (previousValue.isNull()) {
-            log.error("First value must be number.");
-            return false;
-        }
-        if (previousValue.isEqual(ExpressionValue.OPERATOR)) {
+        if (expressionValueTypes[index - 1].isOPERATOR()) {
             log.error("Two operators came out in a row.");
             return false;
         }
-        previousValue.change(ExpressionValue.OPERATOR);
-        return true;
-    }
-
-    private static Boolean validateSingleNumberValue(ExpressionValueWrapper previousValue) {
-        if (!previousValue.isNull() && previousValue.isEqual(ExpressionValue.NUMBER)) {
-            log.error("Two numbers came out in a row.");
-            return false;
-        }
-        previousValue.change(ExpressionValue.NUMBER);
         return true;
     }
 }
