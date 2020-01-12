@@ -1,6 +1,4 @@
-package com.teamzunior.stringcalculator.calculator;
-
-import com.teamzunior.stringcalculator.operator.Operator;
+package com.teamzunior.stringcalculator.operator;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -25,16 +23,7 @@ public enum OperatorComputer {
         this.operator = operator;
     }
 
-    public Optional<OperatorComputer> findComputerBySymbol(final String element) {
-
-        if (symbol.equalsIgnoreCase(element)) {
-            return Optional.of(this);
-        }
-
-        return Optional.empty();
-    }
-
-    public BigDecimal calculate(final BigDecimal a, final BigDecimal b) {
-        return operator.compute(a, b);
+    public BigDecimal calculate(final BigDecimal x, final BigDecimal y) {
+        return operator.compute(x, y);
     }
 }

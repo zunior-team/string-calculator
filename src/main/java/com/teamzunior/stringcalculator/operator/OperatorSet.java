@@ -1,6 +1,7 @@
 package com.teamzunior.stringcalculator.operator;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 import static com.teamzunior.stringcalculator.constant.OperatorConstant.*;
 
@@ -9,15 +10,23 @@ import static com.teamzunior.stringcalculator.constant.OperatorConstant.*;
  */
 public final class OperatorSet {
 
-    // dummy
-    private final static HashMap<String, Object> set = new HashMap<String, Object>(){{
-        put(PLUS_SYMBOL, new Object());
-        put(SUBTRACT_SYMBOL, new Object());
-        put(DIVIDE_SYMBOL, new Object());
-        put(MULTIPLY_SYMBOL, new Object());
+    private final static HashMap<String, OperatorComputer> set = new HashMap<String, OperatorComputer>(){{
+        put(PLUS_SYMBOL, OperatorComputer.PLUS);
+        put(SUBTRACT_SYMBOL, OperatorComputer.SUBTRACT);
+        put(DIVIDE_SYMBOL, OperatorComputer.DIVIDE);
+        put(MULTIPLY_SYMBOL, OperatorComputer.MULTIPLY);
     }};
 
     public static boolean containsSymbol(final String Symbol) {
         return set.containsKey(Symbol);
+    }
+
+    public static Optional<OperatorComputer> findComputerBySymbol(final String symbol) {
+
+        if(set.get(symbol) == null){
+            return Optional.empty();
+        }
+
+        return Optional.of(set.get(symbol));
     }
 }
