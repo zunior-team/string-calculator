@@ -12,11 +12,16 @@ import java.util.Map;
 public class StringOperators {
     private Map<String, Operator> operators = new HashMap<>();
 
+    private static final String PLUS_SIGN = "+";
+    private static final String MINUS_SIGN = "-";
+    private static final String MULTIPLY_SIGN = "*";
+    private static final String DIVIDE_SIGN = "/";
+
     public StringOperators() {
-        operators.put("+", new PlusOperator());
-        operators.put("-", new MinusOperator());
-        operators.put("*", new MultiplyOperator());
-        operators.put("/", new DivideOperator());
+        operators.put(PLUS_SIGN, new PlusOperator());
+        operators.put(MINUS_SIGN, new MinusOperator());
+        operators.put(MULTIPLY_SIGN, new MultiplyOperator());
+        operators.put(DIVIDE_SIGN, new DivideOperator());
     }
 
     public Operator get(String sign) {

@@ -10,8 +10,11 @@ import java.util.stream.IntStream;
 public class ExpressionUtils {
     private static final String BLANK = " ";
 
-    public static String[] separateByBlank(String expression) {
-        return expression.split(BLANK);
+    private ExpressionUtils() {
+    }
+
+    public static String[] separateByBlank(String expressionString) {
+        return expressionString.split(BLANK);
     }
 
     public static Boolean validate(String[] expression) {
@@ -29,7 +32,7 @@ public class ExpressionUtils {
     }
 
     private static boolean validateSingleValue(String[] expression, ExpressionValue[] expressionValueTypes, int index) {
-        if(StringUtils.isEmpty(expression[index])) {
+        if (StringUtils.isEmpty(expression[index])) {
             return false;
         }
 
@@ -65,7 +68,7 @@ public class ExpressionUtils {
             return false;
         }
 
-        if (expressionValueTypes[index - 1].isOPERATOR()) {
+        if (expressionValueTypes[index - 1].isOperator()) {
             log.error("Two operators came out in a row.");
             return false;
         }

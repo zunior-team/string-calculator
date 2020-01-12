@@ -7,7 +7,7 @@ public enum ExpressionValue {
         return this.equals(ExpressionValue.NUMBER);
     }
 
-    public boolean isOPERATOR() {
+    public boolean isOperator() {
         return this.equals(ExpressionValue.OPERATOR);
     }
 }
