@@ -22,7 +22,7 @@ public class SplitterTest {
     @DisplayName("들어온 문자열을 공백을 기준으로 자른다.")
     void splitByWhiteSpaceTest(final String line, final int count) {
 
-        final int length = Splitter.splitByWhiteSpace(line).length;
+        final long length = Splitter.splitByWhiteSpace(line).count();
         assertThat(length).isEqualTo(count);
     }
 }

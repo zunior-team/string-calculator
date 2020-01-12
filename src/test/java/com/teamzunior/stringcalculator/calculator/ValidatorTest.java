@@ -15,21 +15,21 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @DisplayName("유효성 검사 테스트")
 class ValidatorTest {
 
-    @ParameterizedTest(name = "{0} 값이 들어왔습니다.")
-    @CsvSource({"''", "null"})
-    @DisplayName("널 값 또는 빈 공백이면 IllegalArgumentException 이 발생한다.")
-    void checkValidOnInputStringTest(@ConvertWith(NullableConverter.class) final String line) {
-
-        assertThrows(IllegalArgumentException.class,
-                () -> Validator.checkValidOnInputString(line));
-    }
-
-    @ParameterizedTest
-    @NullAndEmptySource
-    @DisplayName("널 값 또는 빈 공백이면 IllegalArgumentException 이 발생한다.")
-    void checkValidOnInputStringSecondTest(final String line) {
-
-        assertThrows(IllegalArgumentException.class,
-                () -> Validator.checkValidOnInputString(line));
-    }
+//    @ParameterizedTest(name = "{0} 값이 들어왔습니다.")
+//    @CsvSource({"''", "null"})
+//    @DisplayName("널 값 또는 빈 공백이면 IllegalArgumentException 이 발생한다.")
+//    void checkValidOnInputStringTest(@ConvertWith(NullableConverter.class) final String line) {
+//
+//        assertThrows(IllegalArgumentException.class,
+//                () -> Validator.checkValidOnInputString(line));
+//    }
+//
+//    @ParameterizedTest
+//    @NullAndEmptySource
+//    @DisplayName("널 값 또는 빈 공백이면 IllegalArgumentException 이 발생한다.")
+//    void checkValidOnInputStringSecondTest(final String line) {
+//
+//        assertThrows(IllegalArgumentException.class,
+//                () -> Validator.checkValidOnInputString(line));
+//    }
 }

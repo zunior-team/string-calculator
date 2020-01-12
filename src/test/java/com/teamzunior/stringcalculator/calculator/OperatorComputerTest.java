@@ -1,16 +1,14 @@
 package com.teamzunior.stringcalculator.calculator;
 
+import com.teamzunior.stringcalculator.operator.OperatorComputer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
 import java.math.BigDecimal;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 /**
  * Created by qkrtjdehd123 on 2020-01-09

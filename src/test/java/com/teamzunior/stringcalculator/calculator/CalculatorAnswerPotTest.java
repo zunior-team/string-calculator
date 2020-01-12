@@ -26,13 +26,13 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
  * Created by qkrtjdehd123 on 2020-01-09
  */
 @DisplayName("값 단지 테스트")
-class ValuePotTest {
+class CalculatorAnswerPotTest {
 
-    private ValuePot pot;
+    private CalculatorAnswerPot pot;
 
     @BeforeEach
     void setup() {
-        this.pot = ValuePot.createPot();
+        this.pot = CalculatorAnswerPot.createPot();
     }
 
     @ParameterizedTest(name = "{0} 값의 결과는 \"{1}\" 입니다.")
