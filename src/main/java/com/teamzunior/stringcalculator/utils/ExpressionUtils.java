@@ -8,8 +8,10 @@ import java.util.stream.IntStream;
 
 @Slf4j
 public class ExpressionUtils {
+    private static final String BLANK = " ";
+
     public static String[] separateByBlank(String expression) {
-        return expression.split(" ");
+        return expression.split(BLANK);
     }
 
     public static Boolean validate(String[] expression) {
@@ -32,12 +34,12 @@ public class ExpressionUtils {
         }
 
         if (StringUtils.isNumeric(expression[index])) {
-            return validateSingleNumberValue(expression, expressionValueTypes, index);
+            return validateSingleNumberValue(expressionValueTypes, index);
         }
-        return validateSingleOperatorValue(expression, expressionValueTypes, index);
+        return validateSingleOperatorValue(expressionValueTypes, index);
     }
 
-    private static boolean validateSingleNumberValue(String[] expression, ExpressionValue[] expressionValueTypes, int index) {
+    private static boolean validateSingleNumberValue(ExpressionValue[] expressionValueTypes, int index) {
         expressionValueTypes[index] = ExpressionValue.NUMBER;
         if (index == 0) {
             return true;
@@ -51,14 +53,14 @@ public class ExpressionUtils {
         return true;
     }
 
-    private static Boolean validateSingleOperatorValue(String[] expression, ExpressionValue[] expressionValueTypes, int index) {
+    private static Boolean validateSingleOperatorValue(ExpressionValue[] expressionValueTypes, int index) {
         expressionValueTypes[index] = ExpressionValue.OPERATOR;
         if (index == 0) {
             log.error("First value must be number.");
             return false;
         }
 
-        if (index == expression.length - 1) {
+        if (index == expressionValueTypes.length - 1) {
             log.error("Last value must be number.");
             return false;
         }

@@ -4,8 +4,12 @@ import com.teamzunior.stringcalculator.service.StringCalculator;
 import com.teamzunior.stringcalculator.service.impl.StringCalculatorUsingPolymorphism;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -49,6 +53,13 @@ class StringCalculatorApplicationTests {
         assertThat(calculator.calculate(expression)).isEqualTo(10);
     }
 
+    @DisplayName(value = "단일 숫자 처리")
+    @ParameterizedTest
+    @MethodSource
+    void singleNumberTests(String expression, Integer result) {
+        assertThat(calculator.calculate(expression)).isEqualTo(result);
+    }
+
     @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 에러 처리.")
     @ParameterizedTest
     @NullAndEmptySource
@@ -68,5 +79,13 @@ class StringCalculatorApplicationTests {
     @ValueSource(strings = {"2 + 3 * ", "+ 3 - 2", "5 5 * 2 - 1", " 5 + + 6 - 3"})
     void invalidExpressionTest(final String expression) {
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> calculator.calculate(expression));
+    }
+
+    private static Stream singleNumberTests() {
+        return Stream.of(
+                Arguments.of("6", 6),
+                Arguments.of("10", 10),
+                Arguments.of("7 ", 7)
+        );
     }
 }
