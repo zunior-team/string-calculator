@@ -1,49 +1,40 @@
 package com.teamzunior.stringcalculator.calculator;
 
+import org.springframework.util.StringUtils;
+
 import java.math.BigDecimal;
+import java.util.stream.Stream;
 
 /**
  * Created by qkrtjdehd123 on 2020-01-08
  */
 public final class Calculator {
 
-    /** 값을 쌓는 단지. **/
-    private final ValuePot pot = ValuePot.createPot();
+    private final CalculatorAnswerPotAdapter potAdapter;
 
-    private Calculator(){ }
+    private Calculator(){
+        this.potAdapter = new CalculatorAnswerPotAdapter();
+    }
 
-    public static Calculator createOfCalculator() {
+    public static Calculator create() {
         return new Calculator();
     }
 
     public BigDecimal computeStringValue(final String line) {
 
-        this.checkLine(line);
+        this.checkIsNullOrEmpty(line);
 
-        final String[]elements = splitLineByWhiteSpace(line);
-        final int size = elements.length;
+        return potAdapter.compute(splitLineByWhiteSpace(line));
+    }
 
-        for(int i = 0; i < size; i++) {
-            pot.compute(elements[i]);
+    private void checkIsNullOrEmpty(final String line) {
+
+        if(StringUtils.isEmpty(line)) {
+            throw new IllegalArgumentException("입력 값이 널 또는 빈 공백 문자열입니다.");
         }
-
-        return pot.getValue();
     }
 
-    /**
-     * 유효성 체크
-     * @param line  들어온 문자열
-     */
-    private void checkLine(final String line) {
-        Validator.checkValidOnInputString(line);
-    }
-
-    /**
-     * 공백 기준 문자열 자르기
-     * @param line  들어온 문자열
-     * @return
-     */
-    private String[] splitLineByWhiteSpace(final String line) {
+    private Stream<String> splitLineByWhiteSpace(final String line) {
         return Splitter.splitByWhiteSpace(line);
     }
 }

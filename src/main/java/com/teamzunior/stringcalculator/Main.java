@@ -4,14 +4,26 @@ import com.teamzunior.stringcalculator.calculator.Calculator;
 
 import java.util.Scanner;
 
+import static com.teamzunior.stringcalculator.ArithmeticConsole.*;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        final Scanner scanner = new Scanner(System.in);
-        final String line = scanner.nextLine();
+        welcomePrintMessage();
 
-        Calculator calculator = Calculator.createOfCalculator();
-        System.out.println(calculator.computeStringValue(line));
+        while(true){
+
+            final String line = listen();
+
+            if(isExit(line)){
+                break;
+            }
+
+            Calculator calculator = Calculator.create();
+            System.out.println(calculator.computeStringValue(line));
+        }
+
+        byePrintMessage();
     }
 }
