@@ -1,27 +1,28 @@
 package com.teamzunior.stringcalculator.model;
 
-import com.teamzunior.stringcalculator.service.StringOperator;
-import com.teamzunior.stringcalculator.service.impl.DivideStringOperator;
-import com.teamzunior.stringcalculator.service.impl.MinusStringOperator;
-import com.teamzunior.stringcalculator.service.impl.MultiplyStringOperator;
-import com.teamzunior.stringcalculator.service.impl.PlusStringOperator;
+import com.teamzunior.stringcalculator.service.Operator;
+import com.teamzunior.stringcalculator.service.impl.DivideOperator;
+import com.teamzunior.stringcalculator.service.impl.MinusOperator;
+import com.teamzunior.stringcalculator.service.impl.MultiplyOperator;
+import com.teamzunior.stringcalculator.service.impl.PlusOperator;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class StringOperators {
-    private Map<String, StringOperator> operatorMap = new HashMap<>();
+    private Map<String, Operator> operators = new HashMap<>();
 
     public StringOperators() {
-        operatorMap.put("+", new PlusStringOperator());
-        operatorMap.put("-", new MinusStringOperator());
-        operatorMap.put("*", new MultiplyStringOperator());
-        operatorMap.put("/", new DivideStringOperator());
+        operators.put("+", new PlusOperator());
+        operators.put("-", new MinusOperator());
+        operators.put("*", new MultiplyOperator());
+        operators.put("/", new DivideOperator());
     }
 
-    public Integer operate(String operator, String a, String b) {
-        if(!operatorMap.containsKey(operator))
-            throw new RuntimeException(operator + " is not acceptable.");
-        return operatorMap.get(operator).operate(a, b);
+    public Operator get(String sign) {
+        if (!operators.containsKey(sign)) {
+            throw new RuntimeException(sign + " is not acceptable.");
+        }
+        return operators.get(sign);
     }
 }
