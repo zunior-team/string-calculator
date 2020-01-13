@@ -7,7 +7,7 @@ public class ArithmeticConsole {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String EXIT = "exit";
 
-    static void welcomePrintMessage() {
+    static void printWelcomeMessage() {
         System.out.println("========== 산술연산의 세계에 오신것을 환영합니다. ==========");
         System.out.println("[\"+\", \"-\", \"*\", \"/\"] 네가지 기호 사용이 가능합니다.");
         System.out.println("ex 1 ) 2 + 5 / 10 * 2");
@@ -24,7 +24,7 @@ public class ArithmeticConsole {
         return (EXIT.equalsIgnoreCase(exitMessage));
     }
 
-    static void byePrintMessage() {
+    static void printByeMessage() {
         System.out.println("====================================================");
         System.out.println("==========           안녕히 가세요.          ==========");
         System.out.println("====================================================");
